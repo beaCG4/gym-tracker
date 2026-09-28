@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gym Progress Tracker</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Gym Progress Tracker</h1>
+      <p class="muted">Registra días, ejercicios y compara progreso por series/peso/reps.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tabBtn active" data-tab="log">Registrar</button>
+      <button class="tabBtn" data-tab="exercise">Ejercicios</button>
+      <button class="tabBtn" data-tab="compare">Comparar días</button>
+      <button class="tabBtn" data-tab="history">Historial</button>
+    </div>
+
+    <!-- Registrar -->
+    <section class="panel active" id="tab-log">
+      <div class="card">
+        <h2>Nuevo registro de día</h2>
+
+        <label>Fecha (ej: 2026-09-27)</label>
+        <div class="row">
+          <input id="dayDate" type="date" />
+          <button id="btnEnsureDay" class="btn">Iniciar día</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3>Ejercicios para este día</h3>
+        <label>Ejercicio</label>
+        <div class="row">
+          <select id="exerciseSelect"></select>
+          <button id="btnAddEntry" class="btn secondary">Agregar al día</button>
+        </div>
+
+        <div class="entriesWrap" id="entriesWrap">
+          <p class="muted" id="noEntriesHint">Primero inicia un día y agrega un ejercicio.</p>
+        </div>
+
+        <div class="divider"></div>
+        <button id="btnSaveDay" class="btn">Guardar cambios</button>
+        <p class="muted small" id="saveStatus"></p>
+      </div>
+    </section>
+
+    <!-- Ejercicios -->
+    <section class="panel" id="tab-exercise">
+      <div class="card">
+        <h2>Tipos de ejercicio</h2>
+
+        <label>Nombre del ejercicio</label>
+        <div class="row">
+          <input id="newExerciseName" placeholder="Ej: Press banca" />
+          <button id="btnAddExercise" class="btn">Agregar</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3>Listado</h3>
+        <div id="exerciseList"></div>
+        <p class="muted small">
+          Nota: si borras un ejercicio, no se destruyen datos; solo deja de aparecer en el select.
+        </p>
+      </div>
+    </section>
+
+    <!-- Comparar -->
+    <section class="panel" id="tab-compare">
+      <div class="card">
+        <h2>Comparar dos días</h2>
+
+        <div class="row">
+          <div style="flex:1">
+            <label>Día A</label>
+            <input id="compareDateA" type="date" />
+          </div>
+          <div style="flex:1">
+            <label>Día B</label>
+            <input id="compareDateB" type="date" />
+          </div>
+        </div>
+
+        <div class="row">
+          <button id="btnCompare" class="btn">Comparar</button>
+          <button id="btnSwapDates" class="btn secondary">Intercambiar</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="compareResults"></div>
+        <p class="muted small">Se muestran los mejores valores por ejercicio (por cada día).</p>
+      </div>
+    </section>
+
+    <!-- Historial -->
+    <section class="panel" id="tab-history">
+      <div class="card">
+        <h2>Historial por ejercicio</h2>
+
+        <label>Ejercicio</label>
+        <div class="row">
+          <select id="historyExerciseSelect"></select>
+          <button id="btnLoadHistory" class="btn">Ver historial</button>
+        </div>
+
+        <div class="divider"></div>
+        <div id="historyResults"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span class="muted small">Datos guardados en este navegador (localStorage).</span>
+    <div class="row" style="justify-content:flex-end; gap:10px;">
+      <button id="btnExport" class="btn secondary">Exportar JSON</button>
+      <button id="btnImport" class="btn secondary">Importar JSON</button>
+      <button id="btnReset" class="btn danger">Reset</button>
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
